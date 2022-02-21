@@ -8,17 +8,21 @@ class Evolution {
   population = []
   initialPopulationCount = 1000
   matingTemperature = 1
+  mutationProbability = 0.05
 
   constructor({
     maxWeightAllowance,
     uniqueItemCount,
     initialPopulationCount,
     matingTemperature,
+    mutationProbability,
   }) {
     this.maxWeightAllowance = maxWeightAllowance
     this.uniqueItemCount = uniqueItemCount
     this.initialPopulationCount = initialPopulationCount
     this.matingTemperature = matingTemperature
+    this.mutationProbability = mutationProbability
+
     this.generateItems()
     this.generateInitialPopulation()
   }
@@ -66,9 +70,14 @@ class Evolution {
   generateCrossover(candidate1, candidate2) {
     const genes = []
     for (var i = 0; i < this.uniqueItemCount; i++) {
-      genes.push(
-        Math.random() > 0.5 ? candidate1.genes[i] : candidate2.genes[i]
-      )
+      // mutate
+      if (Math.random() < this.mutationProbability) {
+        genes.push(Math.random() < 0.5)
+      } else {
+        genes.push(
+          Math.random() > 0.5 ? candidate1.genes[i] : candidate2.genes[i]
+        )
+      }
     }
     return { genes, fitness: this.calculateFitness(genes) }
   }
@@ -116,12 +125,17 @@ class Evolution {
 }
 
 const Knapsack = new Evolution({
-  initialPopulationCount: 20,
+  initialPopulationCount: 200,
   matingTemperature: 2,
   maxWeightAllowance: 10,
   uniqueItemCount: 10,
+  mutationProbability: 0.05,
 })
 Knapsack.evolve(100)
-console.log(JSON.stringify(Knapsack.population.slice(0, 5)))
+console.log(
+  JSON.stringify(
+    Knapsack.population.sort((a, b) => b.fitness - a.fitness).slice(0, 5)
+  )
+)
 
 // TODO: add random mutation
