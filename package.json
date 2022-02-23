@@ -1,0 +1,25 @@
+{
+  "name": "genetic-algorithm",
+  "version": "1.0.0",
+  "description": "",
+  "main": "Evolution.js",
+  "scripts": {
+    "knapsack": "node knapsack.js",
+    "tsp": "node tsp.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thomasuebi/genetic-algorithm.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thomasuebi/genetic-algorithm/issues"
+  },
+  "homepage": "https://github.com/thomasuebi/genetic-algorithm#readme",
+  "dependencies": {
+    "compute-histogram": "^0.9.11",
+    "image-charts": "^6.0.18"
+  }
+}
