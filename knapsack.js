@@ -4,7 +4,7 @@ const Evolution = require("./Evolution")
 
 const initialPopulationCount = 15
 const uniqueItemCount = 10
-const matingTemperature = 10
+const matingTemperature = 9
 const maxWeightAllowance = 10
 let items = []
 
@@ -129,10 +129,10 @@ const profile = async (iterationCount, generations) => {
           })
           .join(",")
     )
-    .chs("999x500")
+    .chs("400x200")
     .chxt("y,x")
     .chdl("t:Max fitness per generation")
   console.log(lineChart.toURL())
 }
 
-profile(100, 50)
+profile(1000, 50)
