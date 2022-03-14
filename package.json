@@ -19,7 +19,6 @@
   },
   "homepage": "https://github.com/thomasuebi/genetic-algorithm#readme",
   "dependencies": {
-    "compute-histogram": "^0.9.11",
     "image-charts": "^6.0.18"
   }
 }

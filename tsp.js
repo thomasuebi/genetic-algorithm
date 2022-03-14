@@ -51,7 +51,6 @@ const calculateFitness = (genes) => {
 const tspEvolution = new Evolution({
   initialPopulation: () => {
     function generateIndividual() {
-      // where genes is a vector of length uniqueItemCount of 0s and 1s indicating which items are in the backpack
       const genes = []
       for (var i = 0; i < numberOfCities; i++) {
         genes.push(Math.random())
@@ -124,12 +123,16 @@ const tspEvolution = new Evolution({
     // generate new population
     const parents = []
     while (parents.length < population.length) {
-      const parent1 = candidates.find(
-        (candidate) => Math.random() < candidate.selectionProbability
-      )
-      const parent2 = candidates.find(
-        (candidate) => Math.random() < candidate.selectionProbability
-      )
+      function selectParent() {
+        const target = Math.random()
+        let collected = candidates[0].selectionProbability
+        let index = 1
+        while (collected < target && index < candidates.length)
+          collected += candidates[index++].selectionProbability
+        return candidates[index - 1]
+      }
+      const parent1 = selectParent()
+      const parent2 = selectParent()
 
       if (parent1 && parent2) {
         parents.push([parent1, parent2])
@@ -139,7 +142,7 @@ const tspEvolution = new Evolution({
   },
 })
 
-tspEvolution.evolve(10)
+tspEvolution.evolve(100)
 
 console.log(
   JSON.stringify(
