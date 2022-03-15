@@ -2,10 +2,10 @@ const ImageCharts = require("image-charts")
 
 const Evolution = require("./Evolution")
 
-const initialPopulationCount = 10
-const matingTemperature = 2
+const initialPopulationCount = 40
+const matingTemperature = 0.2
 const numberOfCities = 10
-const numberOfProportions = 5
+const numberOfProportions = 3
 
 const distanceBetweenCities = (city1, city2) => {
   return Math.sqrt(
@@ -95,7 +95,7 @@ const tspEvolution = () =>
       return genes
     },
     mutate: (genes) => {
-      for (var i = 0; i < uniqueItemCount; i++) {
+      for (var i = 0; i < numberOfCities; i++) {
         if (Math.random() < mutationProbability) {
           genes[i] = Math.random()
         }

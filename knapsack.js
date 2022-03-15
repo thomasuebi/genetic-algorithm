@@ -112,9 +112,13 @@ const knapSackEvolution = () =>
 
 const profile = async (iterationCount, generations) => {
   const iterations = []
+  let max = 0
   for (let index = 0; index < iterationCount; index++) {
-    iterations.push(await knapSackEvolution().evolve(generations))
+    const result = await knapSackEvolution().evolve(generations)
+    iterations.push(result)
+    max = Math.max(max, result[generations - 1]?.maxFitness)
   }
+  console.log("max", max)
   const lineChart = ImageCharts()
     .cht("lc")
     .chd(
